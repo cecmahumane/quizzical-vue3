@@ -3,13 +3,20 @@
   import { ref } from 'vue';
   import uniqueId from 'lodash.uniqueid';
 
-  let quizData = ref({});
-  let finalQuizData = ref({})
+  interface QuizDataItem {
+    question: string;
+    id: string;
+    answers: { answer: string; answerId: string }[];
+  }
+
+  let quizData = ref<QuizDataItem[]>([]);
 
   interface ApiResponse {
     results: {
       correct_answer: string,
       incorrect_answers: string[],
+      selected_answer: string,
+      id: string,
       question: string
     }[];
   }
@@ -26,6 +33,7 @@
       })
       return {
         question: htmlDecode(result.question),
+        id: uniqueId(),
         answers: decodedAnswers.map(x => {
           return {
             answer: x,
@@ -34,7 +42,6 @@
         }),
         correct_answer: htmlDecode(result.correct_answer),
         selected_answer: "",
-        id: uniqueId()
       }
     })
     quizData.value = remappedData;
@@ -59,10 +66,11 @@
 </script>
 
 <template>
-  <h1>Hello App</h1>
+  <h1>Quizzical Vue3</h1>
   {{ quizData }}
   <Trivia
     v-for="data in quizData"
+    :key="data.id"
     :question="data.question"
     :answers="data.answers"
   />

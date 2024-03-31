@@ -5,17 +5,29 @@
         question: String,
         answers: Array
     })
+
+    // const test: void = () => {
+    //     alert(childEvent);
+    // }
 </script>
 
 <template>
     <p>{{ props.question }}</p>
-    <Buttons
-        v-for="answer in props.answers"
-        :answer="answer"
-        />
+    <div class="btn-box">
+        <Buttons
+            v-for="answer in props.answers"
+            :answer="answer"
+            @click="test"
+            />
+
+    </div>
     <hr/>
 </template>
 
 <style scoped>
+    .btn-box {
+        display: flex;
+        gap: 30px;
 
+    }
 </style>
