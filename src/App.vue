@@ -73,6 +73,7 @@
     :key="data.id"
     :question="data.question"
     :answers="data.answers"
+   
   />
 </template>
 

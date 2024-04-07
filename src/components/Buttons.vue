@@ -1,22 +1,31 @@
 <script setup lang="ts">
-import { defineEmits } from "vue";
+import { defineEmits, ref } from "vue";
     const props = defineProps({
         answer: {
           type: Object,
         }
     })
 
+    const buttonColour = ref('blue');
+    let isToggled: boolean = true
+
+    const changeColour = () => {
+      isToggled = !isToggled;
+      buttonColour.value = isToggled ? 'blue' : 'red';
+    }
+
     const emit = defineEmits(["childEvent"]);
 
     const childEvent = () => {
-      emit(alert(props.answer?.answer))
+      // emit(alert(props.answer?.answer))
+      changeColour();
     }
 
     
 </script>
 
 <template>
-  <div @click="childEvent" class="btn">
+  <div @click="childEvent" class="btn" :style="{backgroundColor: buttonColour}">
     <p>{{ props.answer?.answer }}</p>
   </div>
 </template>
