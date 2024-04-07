@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import Trivia from './components/Trivia.vue';
-  import { ref } from 'vue';
+  import { ref, provide } from 'vue';
   import uniqueId from 'lodash.uniqueid';
 
   interface QuizDataItem {
@@ -10,6 +10,7 @@
   }
 
   let quizData = ref<QuizDataItem[]>([]);
+  let sharedData = 'testing from grandad'
 
   interface ApiResponse {
     results: {
@@ -63,9 +64,11 @@
                   }
 
   fetchedQuizData();
+  provide('sharedData', sharedData)
 </script>
 
 <template>
+  <!-- <p>{{ sharedData }}</p> -->
   <h1>Quizzical Vue3</h1>
   {{ quizData }}
   <Trivia

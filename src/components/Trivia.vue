@@ -12,6 +12,7 @@
 </script>
 
 <template>
+    <p>{{ emittedData }}</p>
     <p>{{ props.question }}</p>
     <div class="btn-box">
         <Buttons

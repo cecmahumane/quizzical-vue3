@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineEmits, ref } from "vue";
+import { defineEmits, ref, inject } from "vue";
     const props = defineProps({
         answer: {
           type: Object,
@@ -7,7 +7,7 @@ import { defineEmits, ref } from "vue";
     })
 
     const buttonColour = ref('blue');
-    let isToggled: boolean = true
+    var isToggled: boolean = true
 
     const changeColour = () => {
       isToggled = !isToggled;
@@ -21,13 +21,13 @@ import { defineEmits, ref } from "vue";
       changeColour();
     }
 
-    
+    const emittedData = inject('sharedData');
 </script>
-
 <template>
   <div @click="childEvent" class="btn" :style="{backgroundColor: buttonColour}">
     <p>{{ props.answer?.answer }}</p>
   </div>
+  <p>{{ emittedData }}</p>
 </template>
 
 <style scoped>
